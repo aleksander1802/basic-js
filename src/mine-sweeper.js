@@ -6,11 +6,11 @@ const { NotImplementedError } = require('../extensions/index.js');
  * in the neighboring cells. Starting off with some arrangement of mines
  * we want to create a Minesweeper game setup.
  *
- * @param {Array<Array>} matrix
+ * @param {Array<Array>} array
  * @return {Array<Array>}
  *
  * @example
- * matrix = [
+ * array = [
  *  [true, false, false],
  *  [false, true, false],
  *  [false, false, false]
@@ -23,10 +23,50 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(array) {
+
+  let result = [];
+
+  for (let i = 0; i < array.length; i++) {
+    let string = [];
+
+    for (let j = 0; j < array[i].length; j++) {
+      let count = 0;
+
+      if(array[i - 1]) { 
+
+        array[i - 1][j - 1]  && array[i - 1][j - 1] ? count += 1 : count; 
+        array[i - 1][j] && array[i - 1][j] ? count += 1 : count; 
+        array[i - 1][j + 1] && array[i - 1][j + 1] ?  count += 1 : count; 
+
+      }
+
+      array[i][j - 1] && array[i][j - 1] ? count += 1 : count; 
+
+      array[i][j + 1] && array[i][j + 1] ? count += 1 : count;
+      
+
+      if(array[i + 1]) {
+
+        array[i + 1][j - 1] && array[i + 1][j - 1] ?  count += 1 : count;
+        array[i + 1][j] && array[i + 1][j] ?  count += 1 : count;
+        array[i + 1][j + 1] && array[i + 1][j + 1] ?  count += 1 : count;
+
+      }
+      
+      string.push(count);
+      //console.log([array[i][j],[i],[j], count]);  
+    }
+
+    result.push(string);
+  }
+
+  return result;
+
+  
 }
+
+ //console.log(minesweeper(array = [    [true, false, false],  [false, true, false],    [false, false, false]  ]));
 
 module.exports = {
   minesweeper

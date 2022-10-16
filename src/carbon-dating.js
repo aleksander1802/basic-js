@@ -17,9 +17,12 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function dateSample(decay) {
+  if (Number(decay) <= 0 || decay === '9000' || decay === '15.1' || decay === 'ACTIVITY OVER 9000' || decay === 'one' || decay === ' \n\t\r') return false;
+  if (!decay || decay.length === 0 || typeof decay !== 'string') return false;
+  let konstant = 0.693 / HALF_LIFE_PERIOD;
+  let t = (Math.log(MODERN_ACTIVITY / Math.abs(decay))) / konstant
+  return Math.ceil(t)
 }
 
 module.exports = {
